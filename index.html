@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kalkulator Kalori Ajaib </title>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Floating 3D Background Decorations -->
+    <div class="decorations" aria-hidden="true">
+        <div class="float-item heart"></div>
+        <div class="float-item strawberry"></div>
+        <div class="float-item apple"></div>
+        <div class="float-item water"></div>
+        <div class="float-item donut"></div>
+        <div class="float-item dumbbell"></div>
+        <div class="float-item bubble"></div>
+    </div>
+
+    <header class="hero">
+        <div class="hero-content">
+            <h1>KALKULATOR KALORI AJAIB</h1>
+            <h2>DIET ROAD SYAKIRA 54 To 45</h2>
+        </div>
+        <div class="hero-card-container">
+            <div class="coach-card 3d-card" id="coachCard">
+                <div class="card-inner">
+                    <img src="MAS COACH.jpeg" alt="Coach Mas Anang" class="coach-img">
+                    <h3>COACH MAS ANANG</h3>
+                    <p>Siap pantau kalori Bebeee! </p>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <!-- Kalori Target & Progress -->
+        <section class="target-section glass-card">
+            <h3>TARGET HARI INI </h3>
+            <div class="progress-container">
+                <div class="progress-bar" id="progressBar"></div>
+                <div class="progress-text"><span id="totalCalories">0</span> / 1200 KCAL</div>
+            </div>
+        </section>
+
+        <div class="grid-layout">
+            <!-- Kalkulator Utama -->
+            <section class="calculator-section glass-card">
+                <h3>Hitung Kalori Makananmu </h3>
+                
+                <div class="input-group">
+                    <label for="foodInput">Jenis makanan atau minuman</label>
+                    <div class="autocomplete-wrapper">
+                        <input type="text" id="foodInput" placeholder="Contoh: nasi putih, ayam goreng, kopi susu..." autocomplete="off">
+                        <ul id="suggestionList" class="suggestions"></ul>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label for="weightInput">Berat / porsi</label>
+                    <div class="weight-wrapper">
+                        <input type="number" id="weightInput" placeholder="0" min="1">
+                        <select id="unitSelect" aria-label="Pilih Unit">
+                            <option value="gram">gram</option>
+                            <option value="ml">ml</option>
+                        </select>
+                    </div>
+                </div>
+
+                <button id="calculateBtn" class="btn-primary">HITUNG KALORI </button>
+
+                <!-- Hasil Kalkulasi (Hidden by default) -->
+                <div id="resultCard" class="result-card hidden">
+                    <h4>HASIL KALORI</h4>
+                    <div class="result-content">
+                        <div class="result-food">
+                            <span id="resName">🍚 Nasi Putih</span>
+                            <span id="resWeight">250 gram</span>
+                        </div>
+                        <div class="result-number">
+                            <span id="resKcal">0</span> KCAL
+                        </div>
+                    </div>
+                    <p class="disclaimer-small">*Estimasi berdasarkan database nutrisi</p>
+                    <button id="addToListBtn" class="btn-secondary">+ INPUT KE HARI INI</button>
+                </div>
+            </section>
+
+            <!-- Daftar Makanan Hari Ini -->
+            <section class="today-list-section glass-card">
+                <h3>MAKANAN HARI INI </h3>
+                <h4 class="selected-date-text" id="displaySelectedDate">Hari Ini</h4>
+                <div class="table-container">
+                    <table id="todayTable">
+                        <thead>
+                            <tr>
+                                <th>Makanan</th>
+                                <th>Berat</th>
+                                <th>Kalori</th>
+                            </tr>
+                        </thead>
+                        <tbody id="todayListBody">
+                            <!-- Diisi via JS -->
+                        </tbody>
+                    </table>
+                </div>
+                <div class="total-summary">
+                    <span>TOTAL:</span>
+                    <span id="summaryTotalKcal" class="highlight-text">0 KCAL</span>
+                </div>
+            </section>
+        </div>
+
+        <div class="grid-layout-bottom">
+            <!-- Kalender History -->
+            <section class="calendar-section glass-card">
+                <h3>KALENDER KALORI </h3>
+                <div class="calendar-header">
+                    <button id="prevMonth" aria-label="Bulan Sebelumnya"><i class="fas fa-chevron-left"></i></button>
+                    <h4 id="monthYear">September 2026</h4>
+                    <button id="nextMonth" aria-label="Bulan Selanjutnya"><i class="fas fa-chevron-right"></i></button>
+                </div>
+                <div class="calendar-days">
+                    <span>Min</span><span>Sen</span><span>Sel</span><span>Rab</span><span>Kam</span><span>Jum</span><span>Sab</span>
+                </div>
+                <div class="calendar-grid" id="calendarGrid">
+                    <!-- Diisi via JS -->
+                </div>
+                <div class="calendar-info" id="calendarInfo">
+                    <!-- Info history diisi via JS -->
+                </div>
+            </section>
+
+            <!-- Progress Berat Badan -->
+            <section class="weight-section glass-card">
+                <h3>PROGRESS BERAT BADAN ⚖️</h3>
+                <p class="note">Input berat badan dilakukan setiap hari Minggu yaa 💗</p>
+                
+                <div class="input-group">
+                    <div class="weight-wrapper">
+                        <input type="number" id="weeklyWeightInput" placeholder="0.0" step="0.1" min="20">
+                        <span class="unit-label">kg</span>
+                    </div>
+                    <button id="saveWeightBtn" class="btn-primary btn-small">SIMPAN</button>
+                </div>
+                <div id="weightMessage" class="message"></div>
+
+                <div class="weight-history">
+                    <h4>Riwayat Mingguan:</h4>
+                    <ul id="weightList">
+                        <!-- Diisi via JS -->
+                    </ul>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Tombol Reset Khusus Hari Ini -->
+                <button id="resetTodayBtn" class="btn-secondary btn-reset">RESET HARI INI 🔄</button>
+
+   <!-- Motivational Section -->
+    <section class="motivational-section">
+        <h1 class="bounce-text">SEMANGAT SAYANGKUU<br>DIETNYAAA </h1>
+    </section>
+
+    <!-- Footer / Sumber Data -->
+    <footer>
+        <div class="glass-footer">
+            <h4>SUMBER DATA NUTRISI </h4>
+            <p>Database nutrisi ini sayang diambil dari data publik terpercaya kaya USDA FoodData Central dan sumber komposisi pangan publik lainnya. Nilai kalori hanya estimasi yaa sayangkuu</p>
+        </div>
+    </footer>
+
+    <!-- Popup Peringatan (Over Target) -->
+    <div id="warningModal" class="modal-overlay hidden">
+        <div class="modal-content glass-card popup-card">
+            <img src="mas a marah.png" alt="Coach" class="popup-img">
+            <h2>KALORINYA KELEBIHAN SAYANGGKUU!!! 😭</h2>
+            <p>Yuk cek lagi porsi dan pilihan makananmu hari ini </p>
+            <button id="closeModalBtn" class="btn-primary">OKE COACH 🥹</button>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="toast hidden"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>
